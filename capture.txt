@@ -1,0 +1,9 @@
+
+add system image foobar username foobar password foobar
+Possible completions:
+  <Enter>       Execute the current command
+
+
+vyos@vyos:~$ add system image foobar username foobar password foobar
+
+b'add system image foobar username foobar password foobar \x1b[?1h\x1b=\r\x1b[m\r\nPossible completions:\x1b[m\r\n  <Enter>       Execute the current command\x1b[m\r\n\r\x1b[K\x1b[?1l\x1b>\r\n      \r\nvyos@vyos:~$ add system image foobar username foobar password foobar '
