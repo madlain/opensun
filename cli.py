@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from collections import namedtuple
+import argparse
 import paramiko
 import re
 import socket
@@ -89,11 +90,33 @@ def new_build_tree(node, path):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description='''
+
+DESCRIPTION:
+
+Explore a VyOS router CLI command tree recursively.
+
+EXAMPLES:
+
+  cli.py -h 192.168.1.1
+
+'''
+    )
+
+    parser.add_argument('-t', '--target', required=True,
+                        help='the IPv4 address of the targeted VyOS router')
+
+    args = parser.parse_args()
+
+    target = args.target
+
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     try:
-        client.connect('10.211.55.7', 22, 'vyos', 'vyos')
+        client.connect(target, 22, 'vyos', 'vyos')
     except paramiko.SSHException or paramiko.socket.error or socket.timeout:
         print("Can't connect!\n")
         sys.exit(1)
